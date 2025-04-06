@@ -1,8 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  /* background-color: #141414; */
-  /* color: #ffffff; */
+  background-color: #141414; 
+  color: #ffffff; 
 }
 /* For LTR (default) */
 [dir="ltr"] .navbar-nav {

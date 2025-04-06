@@ -160,49 +160,29 @@ Line Height
         <!-- Additional details -->
         <div class="additional-details mb-0">
           @if(tvshow.next_episode_to_air) {
+          <!-- Next Episode Card -->
           <div class="next-episode mt-4">
             <h5>Next Episode</h5>
-            <div class="card bg-white border-1 rounder-sm">
-              <div
-                class="card-body row justify-content-between align-items-center g-5"
-              >
+            <div class="card border-0">
+              <div class="card-body row justify-content-between align-items-center g-5">
                 <div class="Episode-cover col-md-2">
-                  <div
-                    class="img-cont"
-                    style="
-                      width: 100%;
-                      height: 90%;
-                      padding: 5px;
-                      border-radius: 5px;
-                    "
-                  ></div>
-                  <img
-                    [src]="
-                      'https://image.tmdb.org/t/p/w500' + tvshow.poster_path
-                    "
-                    class="img-fluid rounded mb-2"
-                    [alt]="tvshow.next_episode_to_air.name"
-                    (error)="handleImageError($event)"
-                  />
+                  <div class="img-cont">
+                    <img
+                      [src]="'https://image.tmdb.org/t/p/w500' + tvshow.poster_path"
+                      class="img-fluid rounded mb-2"
+                      [alt]="tvshow.next_episode_to_air.name"
+                      (error)="handleImageError($event)"
+                    />
+                  </div>
                 </div>
                 <div class="info col-md-10">
                   <h6 class="card-title">
                     Episode {{ tvshow.next_episode_to_air.episode_number }}:
                     {{ tvshow.next_episode_to_air.name }}
                   </h6>
+                  <p class="card-text">{{ tvshow.next_episode_to_air.overview || "No overview available." }}</p>
                   <p class="card-text">
-                    {{
-                      tvshow.next_episode_to_air.overview ||
-                        "No overview available."
-                    }}
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted"
-                      >Air Date:
-                      {{
-                        tvshow.next_episode_to_air.air_date | date : "MMM d, y"
-                      }}</small
-                    >
+                    <small>Air Date: {{ tvshow.next_episode_to_air.air_date | date : "MMM d, y" }}</small>
                   </p>
                 </div>
               </div>
