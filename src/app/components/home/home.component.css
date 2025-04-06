@@ -442,3 +442,59 @@
     font-size: 1.75rem;
   }
 }
+
+/* Add these styles at the end of your existing CSS */
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.page-item {
+  list-style: none;
+}
+
+.page-link {
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 40px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-link:hover:not(.disabled) {
+  background-color: #e31212;
+  border-color: #e31212;
+}
+
+.page-item.active .page-link {
+  background-color: #e31212;
+  border-color: #e31212;
+}
+
+.page-item.disabled .page-link {
+  background-color: #2a2a2a;
+  border-color: #2a2a2a;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}

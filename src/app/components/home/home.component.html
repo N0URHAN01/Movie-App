@@ -44,6 +44,16 @@
 </div>
 
 <div class="container mt-4">
+
+  @if(isLoading) {
+    <div class="loading-spinner">
+      <div class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  }
+
+  <!-- Movies grid -->
   <div class="row">
     <div class="col-md-3 mb-4" *ngFor="let movie of movies">
       <div class="card h-100">
@@ -62,5 +72,58 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <nav aria-label="Movies pagination">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+        </li>
+        
+        <li class="page-item" *ngIf="currentPage > 2">
+          <button class="page-link" (click)="onPageChange(1)">1</button>
+        </li>
+        
+        <li class="page-item" *ngIf="currentPage > 3">
+          <span class="page-link">...</span>
+        </li>
+        
+        <li class="page-item" *ngIf="currentPage > 1">
+          <button class="page-link" (click)="onPageChange(currentPage - 1)">
+            {{ currentPage - 1 }}
+          </button>
+        </li>
+        
+        <li class="page-item active">
+          <button class="page-link">{{ currentPage }}</button>
+        </li>
+        
+        <li class="page-item" *ngIf="currentPage < totalPages">
+          <button class="page-link" (click)="onPageChange(currentPage + 1)">
+            {{ currentPage + 1 }}
+          </button>
+        </li>
+        
+        <li class="page-item" *ngIf="currentPage < totalPages - 2">
+          <span class="page-link">...</span>
+        </li>
+        
+        <li class="page-item" *ngIf="currentPage < totalPages - 1">
+          <button class="page-link" (click)="onPageChange(totalPages)">
+            {{ totalPages }}
+          </button>
+        </li>
+        
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>

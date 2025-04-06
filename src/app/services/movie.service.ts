@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, switchMap } from 'rxjs';
 import { LanguageService } from './language.service';
 
@@ -15,10 +15,15 @@ export class MovieService {
     private languageService: LanguageService
   ) { }
 
-  getNowPlayingMovies(): Observable<any> {
+  getNowPlayingMovies(page: number = 1): Observable<any> {
     return this.languageService.currentLanguage$.pipe(
       switchMap(language => {
-        return this.http.get(`${this.baseUrl}/movie/now_playing?api_key=${this.apiKey}&language=${language}`);
+        return this.http.get(`${this.baseUrl}/movie/now_playing`, {
+          params: new HttpParams()
+            .set('api_key', this.apiKey)
+            .set('language', language)
+            .set('page', page.toString())
+        });
       })
     );
   }

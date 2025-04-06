@@ -80,8 +80,25 @@
   height: 1.5em;
 }
 
+.navbar .container-fluid {
+  padding: 0;
+}
 
-/* Add these styles to your existing CSS */
+.navbar-collapse {
+  flex-grow: 0;
+  margin-left: auto;
+}
+
+.navbar-nav {
+  gap: 1rem;
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    margin-top: 1rem;
+  }
+}
+
 .dropdown-menu {
   min-width: 100px;
   margin-top: 0.5rem;
