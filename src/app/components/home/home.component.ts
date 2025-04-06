@@ -16,11 +16,35 @@ import { MovieService } from '../../services/movie.service';
 })
 export class HomeComponent implements OnInit {
   movies: any[] = [];
-  
+  currentSlide = 0;
+  private slideInterval: any;
+
   constructor(private movieService: MovieService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadMovies();
+    this.startSlideShow();
+  }
+
+  ngOnDestroy() {
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval);
+    }
+  }
+
+  startSlideShow() {
+    this.slideInterval = setInterval(() => {
+      this.currentSlide = (this.currentSlide + 1) % 3;
+    }, 5000);
+  }
+
+  setCurrentSlide(index: number) {
+    this.currentSlide = index;
+    // Reset the interval when manually changing slides
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval);
+      this.startSlideShow();
+    }
   }
 
   loadMovies(): void {

@@ -1,15 +1,64 @@
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-slider">
+    <div class="slide" *ngFor="let movie of movies.slice(0, 3); let i = index" 
+         [class.active]="currentSlide === i"
+         [style.opacity]="currentSlide === i ? 1 : 0"
+         [style.visibility]="currentSlide === i ? 'visible' : 'hidden'">
+      <div class="slide-content">
+        <div class="movie-info">
+          <div class="movie-meta-top">
+            <span class="year">{{ movie.release_date | date:'yyyy' }}</span>
+            <span class="duration">{{ movie.runtime }} min</span>
+            <span class="rating-value">{{ movie.vote_average * 10 }}%</span>
+          </div>
+          <h1 class="movie-title">{{ movie.title }}</h1>
+          <p class="movie-overview">{{ movie.overview }}</p>
+          <div class="movie-actions">
+            <button class="watch-trailer">
+              <i class="fas fa-play"></i>
+              Watch trailer
+            </button>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+        <div class="movie-poster">
+          <img [src]="getImageUrl(movie.backdrop_path)" [alt]="movie.title">
+        </div>
+        <div class="slide-overlay"></div>
+      </div>
+    </div>
+    <div class="slide-indicators">
+      <div class="indicator" *ngFor="let movie of movies.slice(0, 3); let i = index" 
+           [class.active]="currentSlide === i"
+           (click)="setCurrentSlide(i)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Movies List Section -->
+<div class="section-header">
+  <h2 class="section-title">Popular Movies</h2>
+  <div class="section-divider"></div>
+</div>
+
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-3 mb-4" *ngFor="let movie of movies">
       <div class="card h-100">
-        <img [src]="getImageUrl(movie.poster_path)" class="card-img-top" [alt]="movie.title">
+        <div class="position-relative">
+          <img [src]="getImageUrl(movie.poster_path)" class="card-img-top" [alt]="movie.title">
+          <span class="rating-badge" 
+                [attr.data-rating]="movie.vote_average * 10 >= 70 ? 'high' : 
+                                movie.vote_average * 10 >= 50 ? 'medium' : 'low'"
+                [style.--rating-percent]="(movie.vote_average * 10) + '%'">
+            {{ (movie.vote_average * 10) | number:'1.0-0' }}%
+          </span>
+        </div>
         <div class="card-body">
           <h5 class="card-title">{{ movie.title }}</h5>
-          <p class="card-text">{{ movie.overview | slice:0:150 }}...</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <span class="badge bg-primary">{{ movie.vote_average | number:'1.1-1' }}</span>
-            <small class="text-muted">{{ movie.release_date | date }}</small>
-          </div>
+          <p class="release-date">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
         </div>
       </div>
     </div>
