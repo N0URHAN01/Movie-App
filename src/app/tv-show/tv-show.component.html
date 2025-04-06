@@ -1,28 +1,76 @@
-<div class="container py-5">
-  <h1 class="text-center mb-5">Popular TV Shows</h1>
-  @if(isLoading){
-  <div class="text-center my-5">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
+<div class="tv-shows-page">
+  <!-- Search Section -->
+  <div class="search-section py-4 bg-dark">
+    <div class="container">
+      <h2 class="text-white mb-4">TV Shows</h2>
+      <div class="search-container">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control search-input"
+            placeholder="Search for TV shows..."
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="searchTvShows()"
+          />
+          <button
+            class="btn btn-primary search-btn"
+            type="button"
+            (click)="searchTvShows()"
+          >
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-  } @if(errorMessage){
-  <div class="alert alert-danger" role="alert">
-    {{ errorMessage }}
-  </div>
-  }
 
-  <div class="row g-4">
-    @for (tvshow of tvshows; track tvshow.id) {
-    <div class="col-12 col-md-6 col-lg-4">
-      <app-tv-show-card [tvshow]="tvshow"> </app-tv-show-card>
+  <!-- Main Content -->
+  <div class="container py-4">
+    <!-- Loading Indicator -->
+    @if(isLoading){
+    <div class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
     }
-  </div>
 
-  <div class="text-center mt-5">
-    @if(!isLoading && !errorMessage) {
-    <button class="btn btn-primary" (click)="loadMore()">Load More</button>
+    <!-- Error Message -->
+    @if(errorMessage){
+    <div class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+    }
+
+    <!-- TV Shows Grid -->
+    <div class="tv-shows-grid">
+      @for (tvshow of tvshows; track tvshow.id) {
+      <div class="tv-show-item">
+        <app-tv-show-card [tvshow]="tvshow"></app-tv-show-card>
+      </div>
+      }
+    </div>
+
+    <!-- Load More Button -->
+    @if(!isLoading && !errorMessage && !isSearching && tvshows.length > 0) {
+    <div class="text-center mt-4">
+      <button
+        class="btn btn-outline-primary load-more-btn"
+        (click)="loadMore()"
+      >
+        Load More
+      </button>
+    </div>
+    }
+
+    <!-- No Results Message -->
+    @if(!isLoading && tvshows.length === 0 && searchQuery) {
+    <div class="text-center my-5">
+      <h4>No results found for "{{ searchQuery }}"</h4>
+      <button class="btn btn-link" (click)="clearSearch()">
+        Return to popular TV shows
+      </button>
+    </div>
     }
   </div>
 </div>

@@ -1,25 +1,22 @@
-<div class="card h-100 shadow-sm">
-  <img
-    [src]="'https://image.tmdb.org/t/p/w500' + tvshow.poster_path"
-    class="card-img-top"
-    [alt]="tvshow.name"
-  />
-  <div class="card-body">
-    <h5 class="card-title">{{ tvshow.name }}</h5>
-    <div class="d-flex justify-content-between align-items-center mb-2">
-      <span class="badge bg-primary">{{ tvshow.vote_average }}</span>
-      <small class="text-muted">{{ tvshow.first_air_date }}</small>
+<!-- tv-show-card.component.html -->
+<div class="tv-show-card">
+  <a [routerLink]="['/tv-shows', tvshow.id]">
+    <img
+      [src]="'https://image.tmdb.org/t/p/w500' + tvshow.poster_path"
+      class="poster-img"
+      [alt]="tvshow.name"
+      (error)="handleImageError($event)"
+    />
+    <div class="tv-show-info">
+      <h5 class="tv-show-title">{{ tvshow.name }}</h5>
+      <div class="tv-show-meta">
+        <span class="vote-average">{{
+          tvshow.vote_average | number : "1.1-1"
+        }}</span>
+        <span class="release-year">{{
+          (tvshow.first_air_date | date : "yyyy") || "N/A"
+        }}</span>
+      </div>
     </div>
-    <p class="card-text text-truncate">{{ tvshow.overview }}</p>
-    <div class="d-flex justify-content-between">
-      <a
-        [routerLink]="['/tv-shows', tvshow.id]"
-        class="btn btn-sm btn-outline-primary"
-        >Details</a
-      >
-      <button (click)="fireMyEvent()" class="btn btn-sm btn-outline-secondary">
-        Share
-      </button>
-    </div>
-  </div>
+  </a>
 </div>
