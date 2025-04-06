@@ -1,7 +1,7 @@
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="hero-slider">
-    <div class="slide" *ngFor="let movie of movies.slice(0, 3); let i = index" 
+    <div class="slide" *ngFor="let movie of movies.slice(0, 3); let i = index"
          [class.active]="currentSlide === i"
          [style.opacity]="currentSlide === i ? 1 : 0"
          [style.visibility]="currentSlide === i ? 'visible' : 'hidden'">
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="slide-indicators">
-      <div class="indicator" *ngFor="let movie of movies.slice(0, 3); let i = index" 
+      <div class="indicator" *ngFor="let movie of movies.slice(0, 3); let i = index"
            [class.active]="currentSlide === i"
            (click)="setCurrentSlide(i)">
       </div>
@@ -58,9 +58,11 @@
     <div class="col-md-3 mb-4" *ngFor="let movie of movies">
       <div class="card h-100">
         <div class="position-relative">
-          <img [src]="getImageUrl(movie.poster_path)" class="card-img-top" [alt]="movie.title">
-          <span class="rating-badge" 
-                [attr.data-rating]="movie.vote_average * 10 >= 70 ? 'high' : 
+          <a [routerLink]="['/movie', movie.id]">
+            <img [src]="getImageUrl(movie.poster_path)" class="card-img-top" [alt]="movie.title">
+          </a>
+          <span class="rating-badge"
+                [attr.data-rating]="movie.vote_average * 10 >= 70 ? 'high' :
                                 movie.vote_average * 10 >= 50 ? 'medium' : 'low'"
                 [style.--rating-percent]="(movie.vote_average * 10) + '%'">
                 {{ (movie.vote_average * 10) | number:'1.0-0' }}%
@@ -88,41 +90,41 @@
             <i class="fas fa-chevron-left"></i>
           </button>
         </li>
-        
+
         <li class="page-item" *ngIf="currentPage > 2">
           <button class="page-link" (click)="onPageChange(1)">1</button>
         </li>
-        
+
         <li class="page-item" *ngIf="currentPage > 3">
           <span class="page-link">...</span>
         </li>
-        
+
         <li class="page-item" *ngIf="currentPage > 1">
           <button class="page-link" (click)="onPageChange(currentPage - 1)">
             {{ currentPage - 1 }}
           </button>
         </li>
-        
+
         <li class="page-item active">
           <button class="page-link">{{ currentPage }}</button>
         </li>
-        
+
         <li class="page-item" *ngIf="currentPage < totalPages">
           <button class="page-link" (click)="onPageChange(currentPage + 1)">
             {{ currentPage + 1 }}
           </button>
         </li>
-        
+
         <li class="page-item" *ngIf="currentPage < totalPages - 2">
           <span class="page-link">...</span>
         </li>
-        
+
         <li class="page-item" *ngIf="currentPage < totalPages - 1">
           <button class="page-link" (click)="onPageChange(totalPages)">
             {{ totalPages }}
           </button>
         </li>
-        
+
         <li class="page-item" [class.disabled]="currentPage === totalPages">
           <button class="page-link" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
             <i class="fas fa-chevron-right"></i>

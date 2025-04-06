@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
 import { WishlistService } from '../../services/wishlist.service';
 import { Subscription } from 'rxjs';
@@ -10,7 +11,8 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [MovieService],
   templateUrl: './home.component.html',

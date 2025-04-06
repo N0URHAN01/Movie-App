@@ -1,0 +1,37 @@
+<div class="container py-4">
+  <h2 class="text-center mb-4">{{ movieTitle }} - Reviews</h2>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-danger" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div *ngIf="!isLoading && reviews.length > 0">
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mb-4" *ngFor="let review of reviews">
+        <div class="card review-card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ review.author }}</h5>
+            <p class="card-text">{{ review.content }}</p>
+          </div>
+          <div class="card-footer text-muted">
+            <small>Published on: {{ review.created_at | date:'MMM dd, yyyy' }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Reviews Message -->
+  <div *ngIf="!isLoading && reviews.length === 0" class="text-center">
+    <p>No reviews available for this movie.</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+</div>

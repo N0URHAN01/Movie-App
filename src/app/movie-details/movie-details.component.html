@@ -1,0 +1,65 @@
+<div *ngIf="movie" class="movie-details">
+  <div class="movie-header">
+    <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" [alt]="movie.title" />
+    <div class="movie-info">
+      <h1>{{ movie.title }}</h1>
+      <p>{{ movie.overview }}</p>
+      <p><strong>Release Date:</strong> {{ movie.release_date | date }}</p>
+      <p><strong>Rating:</strong> {{ movie.vote_average }}</p>
+
+      <!-- Add to Favorites Button -->
+      <button
+        type="button"
+        class="btn btn-outline-light btn-action me-2"
+        title="Add to Favorites"
+        (click)="toggleFavorite(movie)"
+      >
+        <i class="fas fa-heart" [class.text-danger]="isFavorite(movie.id)"></i>
+        {{ isFavorite(movie.id) ? 'Remove from Favorites' : 'Add to Favorites' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="movie-reviews">
+    <h2>Reviews</h2>
+    <div *ngIf="reviews.length > 0; else noReviews">
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let review of reviews.slice(0, 3)">
+          <div class="card review-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ review.author }}</h5>
+              <p class="card-text">{{ review.content | slice:0:150 }}...</p>
+              <a [routerLink]="['/movie', movie.id, 'reviews']" class="btn btn-link">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="reviews.length > 3" class="text-center mt-3">
+        <a [routerLink]="['/movie', movie.id, 'reviews']" class="btn btn-primary">View All Reviews</a>
+      </div>
+    </div>
+    <ng-template #noReviews>
+      <p>No reviews available for this movie.</p>
+    </ng-template>
+  </div>
+
+  <!-- Recommendations Section -->
+  <div class="movie-recommendations">
+    <h2>Recommendations</h2>
+    <div class="row">
+      <div class="col-md-3 mb-4" *ngFor="let rec of recommendations">
+        <div class="recommendation-card">
+          <a [routerLink]="['/movie', rec.id]">
+            <img [src]="'https://image.tmdb.org/t/p/w500' + rec.poster_path" class="img-fluid rounded mb-2" [alt]="rec.title" />
+            <h5 class="recommendation-title">{{ rec.title }}</h5>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge bg-primary">{{ rec.vote_average | number:'1.1-1' }}</span>
+              <small class="text-muted">{{ rec.release_date | date:'yyyy' }}</small>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

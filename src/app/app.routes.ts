@@ -1,10 +1,11 @@
 import {Routes} from '@angular/router';
 import { TvShowDetailsComponent } from './tv-show-details/tv-show-details.component';
-
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TvShowComponent } from './tv-show/tv-show.component';
 import { HomeComponent } from './components/home/home.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MovieReviewsComponent } from './movie-reviews/movie-reviews.component';
 
 //routing configs
 
@@ -17,6 +18,8 @@ export const routes: Routes = [
       path: 'wishlist',
       component: WishlistComponent
     },  // Added comma here
+    { path: 'movie/:id', component: MovieDetailsComponent, title: 'Movie Details' },
+    { path: 'movie/:id/reviews', component: MovieReviewsComponent, title: 'Movie Reviews' },
     { path: '**', component: NotFoundComponent, title: "Error 404 not found" }
 ];
 
