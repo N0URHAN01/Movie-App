@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieService } from '../../services/movie.service';
+import { WishlistService } from '../../services/wishlist.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,15 +16,24 @@ import { MovieService } from '../../services/movie.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   movies: any[] = [];
   currentSlide = 0;
   currentPage = 1;
   totalPages = 0;
   isLoading = false;
   private slideInterval: any;
+  private wishlistSubscription: Subscription;
+  wishlistMovies: Set<number> = new Set();
 
-  constructor(private movieService: MovieService) { }
+  constructor(
+    private movieService: MovieService,
+    private wishlistService: WishlistService
+  ) {
+    this.wishlistSubscription = this.wishlistService.wishlist$.subscribe(movies => {
+      this.wishlistMovies = new Set(movies.map(m => m.id));
+    });
+  }
 
   ngOnInit() {
     this.loadMovies();
@@ -33,6 +44,19 @@ export class HomeComponent implements OnInit {
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
     }
+    this.wishlistSubscription.unsubscribe();
+  }
+
+  toggleWishlist(movie: any) {
+    if (this.isInWishlist(movie.id)) {
+      this.wishlistService.removeFromWishlist(movie.id);
+    } else {
+      this.wishlistService.addToWishlist(movie);
+    }
+  }
+
+  isInWishlist(movieId: number): boolean {
+    return this.wishlistMovies.has(movieId);
   }
 
   startSlideShow() {

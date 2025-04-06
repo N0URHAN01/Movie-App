@@ -31,4 +31,18 @@ export class MovieService {
   getImageUrl(path: string): string {
     return `https://image.tmdb.org/t/p/w500${path}`;
   }
+
+  searchMovies(query: string, page: number = 1): Observable<any> {
+    return this.languageService.currentLanguage$.pipe(
+      switchMap(language => {
+        return this.http.get(`${this.baseUrl}/search/movie`, {
+          params: new HttpParams()
+            .set('api_key', this.apiKey)
+            .set('language', language)
+            .set('query', query)
+            .set('page', page.toString())
+        });
+      })
+    );
+  }
 }

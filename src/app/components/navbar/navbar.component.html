@@ -22,8 +22,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/wishlist" routerLinkActive="active">
-              <i class="fas fa-heart me-1"></i>Wishlist
+            <a class="nav-link" routerLink="/wishlist" routerLinkActive="active">
+              <i class="fas fa-heart"></i>
+              Wishlist
+              <span class="badge bg-danger ms-1">{{ wishlistCount$ | async }}</span>
             </a>
           </li>
           <li class="nav-item dropdown">
