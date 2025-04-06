@@ -1,0 +1,31 @@
+<p>tv-show works!</p>
+<span
+  ><button>Down <i #hambozo class="fa-solid fa-circle-chevron-down"></i></button
+></span>
+<!-- @defer(on interaction(hambozo)) { -->
+<!-- @defer(when isAdmin) { show recommand when isAdmin true-->
+<!-- @defer(on interaction(hambozo) ; when isAdmin) { show recommand when isAdmin true-->
+
+<p>on interaction works!</p>
+<!-- stadealone componant only -->
+
+<!--on idle ready state-->
+<!--on interaction state لما يحصل تفاعل على شئ معين-->
+<!--on hover state لما يحصل hover على شئ معين-->
+<!--on timer state لما يحصل تفاعل على شئ معين-->
+<!--on viewport state لما يحصل scroll على العنصر ده    -->
+<!-- @placeholder -->
+<app-recommand-tv-show></app-recommand-tv-show>
+<!-- } @placeholder {
+<p class="txt-center fw-bold fs-1 bg-warning text-danger">
+  Recommened tv shows
+</p>
+} @loading(minimum 3s) {
+<!-- @loading  Appear when loading after interaction -->
+<!--<p class="txt-center fw-bold fs-1 text-danger">
+  Loading... <i class="fa-solid fa-spinner fa-spin"></i>
+</p>-->
+<!--
+} @error {
+<p class="txt-center fw-bold fs-1 text-danger">error</p>
+} -->
