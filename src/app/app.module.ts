@@ -8,4 +8,5 @@ import { NgModule } from '@angular/core';
       RouterModule
     ]
   })
-export class AppModule {}
+
+export class AppModule { }
