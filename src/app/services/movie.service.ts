@@ -32,6 +32,24 @@ export class MovieService {
     return `https://image.tmdb.org/t/p/w500${path}`;
   }
 
+  getMovieDetails(movieId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/movie/${movieId}`, {
+      params: new HttpParams().set('api_key', this.apiKey)
+    });
+  }
+
+  getMovieRecommendations(movieId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/movie/${movieId}/recommendations`, {
+      params: new HttpParams().set('api_key', this.apiKey)
+    });
+  }
+
+  getMovieReviews(movieId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/movie/${movieId}/reviews`, {
+      params: new HttpParams().set('api_key', this.apiKey)
+    });
+  }
+
   searchMovies(query: string, page: number = 1): Observable<any> {
     return this.languageService.currentLanguage$.pipe(
       switchMap(language => {
