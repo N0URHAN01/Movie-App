@@ -26,4 +26,9 @@ export class TvService {
 getTvShowRecommendations(id: number): Observable<any> {
   return this.http.get(`${this.baseUrl}/tv/${id}/recommendations?api_key=${this.apiKey}&sort_by=popularity.desc&include_adult=false&with_original_language=en&certification_country=US&certification.lte=TV-14`);
 }
+searchTvShows(query: string, page: number = 1): Observable<any> {
+  return this.http.get(
+    `${this.baseUrl}/search/tv?api_key=${this.apiKey}&query=${encodeURIComponent(query)}&page=${page}`
+  );
+}
 }

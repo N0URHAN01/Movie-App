@@ -1,6 +1,20 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #141414;
-  color: #ffffff;
+  /* background-color: #141414; */
+  /* color: #ffffff; */
+}
+/* For LTR (default) */
+[dir="ltr"] .navbar-nav {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+/* For RTL */
+[dir="rtl"] .navbar-nav {
+  margin-left: auto;
+  margin-right: 0;
+}
+[dir="rtl"] .input-group {
+  direction: ltr;
 }

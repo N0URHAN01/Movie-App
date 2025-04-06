@@ -19,7 +19,7 @@
     <!-- Navbar content -->
     <div class="collapse navbar-collapse" id="navbarContent">
       <!-- Main navigation links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" routerLink="/movies" routerLinkActive="active"
             >Movies</a
@@ -31,9 +31,34 @@
           >
         </li>
       </ul>
-
+      <div class="nav-item dropdown me-3">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          id="languageDropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fas fa-globe me-1"></i>{{ currentLang | uppercase }}
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+          aria-labelledby="languageDropdown"
+        >
+          <li *ngFor="let lang of languages">
+            <a
+              class="dropdown-item"
+              href="javascript:void(0)"
+              (click)="changeLanguage(lang)"
+            >
+              {{ lang | uppercase }}
+            </a>
+          </li>
+        </ul>
+      </div>
       <!-- Language selector -->
-      <div class="dropdown me-3">
+      <!-- <div class="dropdown me-3">
         <button
           class="btn btn-outline-light dropdown-toggle"
           type="button"
@@ -49,7 +74,7 @@
           <li><a class="dropdown-item" href="#">Français</a></li>
           <li><a class="dropdown-item" href="#">Deutsch</a></li>
         </ul>
-      </div>
+      </div> -->
       <!-- wishlist menu -->
       <div class="nav-item">
         <a class="nav-link" routerLink="/wishlist" routerLinkActive="active">

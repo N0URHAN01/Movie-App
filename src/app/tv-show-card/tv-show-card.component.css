@@ -1,18 +1,50 @@
-.card {
-  transition: transform 0.3s ease;
+/* tv-show-card.component.css */
+.tv-show-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.tv-show-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.card-img-top {
-  height: 400px;
+.poster-img {
+  width: 100%;
+  aspect-ratio: 2/3;
   object-fit: cover;
+  display: block;
 }
 
-.badge {
+.tv-show-info {
+  padding: 12px;
+}
+
+.tv-show-title {
   font-size: 1rem;
-  padding: 0.35em 0.65em;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tv-show-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.vote-average {
+  color: #000;
+  font-weight: bold;
+}
+
+.vote-average::before {
+  content: "★ ";
+  color: #01b4e4;
 }

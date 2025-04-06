@@ -204,3 +204,7 @@ h1 {
     font-size: 1.2rem;
   }
 }
+.vote-average::before {
+  content: "★ ";
+  color: #01b4e4;
+}
