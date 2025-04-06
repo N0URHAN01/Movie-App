@@ -59,24 +59,21 @@
       <div class="card h-100">
         <div class="position-relative">
           <img [src]="getImageUrl(movie.poster_path)" class="card-img-top" [alt]="movie.title">
-          <button class="wishlist-btn" (click)="toggleWishlist(movie)">
-            <i class="fas fa-heart" [class.filled]="isInWishlist(movie.id)"></i>
-          </button>
           <span class="rating-badge" 
                 [attr.data-rating]="movie.vote_average * 10 >= 70 ? 'high' : 
                                 movie.vote_average * 10 >= 50 ? 'medium' : 'low'"
                 [style.--rating-percent]="(movie.vote_average * 10) + '%'">
-            {{ (movie.vote_average * 10) | number:'1.0-0' }}%
-          </span>
+                {{ (movie.vote_average * 10) | number:'1.0-0' }}%
+              </span>
         </div>
         <div class="card-body">
-          <div class="card-title-container">
-            <h5 class="card-title">{{ movie.title }}</h5>
+          <h5 class="card-title">{{ movie.title }}</h5>
+          <div class="date-wishlist-container">
+            <p class="release-date">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
             <button class="wishlist-btn" (click)="toggleWishlist(movie)">
               <i class="fas fa-heart" [class.filled]="isInWishlist(movie.id)"></i>
             </button>
           </div>
-          <p class="release-date">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
         </div>
       </div>
     </div>

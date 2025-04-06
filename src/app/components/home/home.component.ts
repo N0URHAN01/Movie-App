@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieService } from '../../services/movie.service';
@@ -28,7 +28,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private movieService: MovieService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private cd: ChangeDetectorRef
   ) {
     this.wishlistSubscription = this.wishlistService.wishlist$.subscribe(movies => {
       this.wishlistMovies = new Set(movies.map(m => m.id));
@@ -53,6 +54,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       this.wishlistService.addToWishlist(movie);
     }
+    // Force change detection
+    this.cd.detectChanges();
   }
 
   isInWishlist(movieId: number): boolean {

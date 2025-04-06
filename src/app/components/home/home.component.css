@@ -34,15 +34,66 @@
   flex: 1;
 }
 
+.date-wishlist-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .wishlist-btn {
   background: transparent;
   border: none;
-  padding: 0;
-  margin-left: 10px;
+  padding: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.1);
+}
+
+.wishlist-btn .fa-heart {
+  font-size: 1.2rem;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.wishlist-btn .filled {
+  color: #e31212;
+}
+
+.wishlist-btn-inline {
+  background: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wishlist-btn-inline .fa-heart {
+  font-size: 1.1rem;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.wishlist-btn-inline .filled {
+  color: #e31212 !important;
+}
+
+/* Remove or comment out the old .wishlist-btn styles */
+.wishlist-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .wishlist-btn .fa-heart {
