@@ -1,5 +1,10 @@
 <!-- Hero Section -->
 <section class="hero-section">
+  <div class="welcome-message">
+    <span class="greeting">Welcome to Movie App</span>
+    <h2 class="tagline">Discover the Magic of Cinema</h2>
+  </div>
+  
   <div class="hero-slider">
     <div class="slide" *ngFor="let movie of movies.slice(0, 3); let i = index"
          [class.active]="currentSlide === i"
