@@ -608,3 +608,100 @@
   justify-content: center;
   margin: 20px 0;
 }
+
+.btn-outline-light {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  transition: all 0.3s ease;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+}
+
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-action .fas {
+  font-size: 0.9rem;
+}
+
+.text-danger {
+  color: #e31212 !important;
+}
+
+.favorite-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.favorite-btn .fa-heart {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.movie-title-link {
+  color: #e7e8ee;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.movie-title-link:hover {
+  color: #0056b3;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.movie-title-link:hover {
+  color: #e31212;
+}
+
+/* Change this class name to match what's in your HTML */
+.favorite-btn .fa-heart[style*="color: rgb(227, 18, 18)"] {
+  color: #e31212 !important;
+}
+
+.favorite-btn:hover {
+  background: rgba(227, 18, 18, 0.1);
+  border-color: #e31212;
+}
+
+.favorite-btn:hover .fa-heart {
+  transform: scale(1.1);
+}
+
+.date-wishlist-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 12px;
+}
+
+/* Remove or comment out the old wishlist button styles */

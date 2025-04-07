@@ -16,7 +16,8 @@ export class WishlistService {
   private loadWishlist() {
     const savedWishlist = localStorage.getItem(this.wishlistKey);
     if (savedWishlist) {
-      this.wishlistSubject.next(JSON.parse(savedWishlist));
+      const wishlist = JSON.parse(savedWishlist);
+      this.wishlistSubject.next(wishlist);
     }
   }
 
@@ -28,13 +29,18 @@ export class WishlistService {
   addToWishlist(movie: any) {
     const currentWishlist = this.wishlistSubject.value;
     if (!this.isInWishlist(movie.id)) {
-      this.saveWishlist([...currentWishlist, movie]);
+      const updatedWishlist = [...currentWishlist, movie];
+      this.saveWishlist(updatedWishlist);
+      return true;
     }
+    return false;
   }
 
   removeFromWishlist(movieId: number) {
     const currentWishlist = this.wishlistSubject.value;
-    this.saveWishlist(currentWishlist.filter(movie => movie.id !== movieId));
+    const updatedWishlist = currentWishlist.filter(movie => movie.id !== movieId);
+    this.saveWishlist(updatedWishlist);
+    return true;
   }
 
   isInWishlist(movieId: number): boolean {
@@ -43,5 +49,9 @@ export class WishlistService {
 
   getWishlistCount(): number {
     return this.wishlistSubject.value.length;
+  }
+
+  getWishlist(): any[] {
+    return this.wishlistSubject.value;
   }
 }

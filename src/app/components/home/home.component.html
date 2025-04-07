@@ -67,13 +67,23 @@
                 [style.--rating-percent]="(movie.vote_average * 10) + '%'">
                 {{ (movie.vote_average * 10) | number:'1.0-0' }}%
               </span>
+              
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{ movie.title }}</h5>
+          <h5 class="card-title">
+            <a [routerLink]="['/movie', movie.id]" class="movie-title-link">{{ movie.title }}</a>
+          </h5>
           <div class="date-wishlist-container">
             <p class="release-date">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
-            <button class="wishlist-btn" (click)="toggleWishlist(movie)">
-              <i class="fas fa-heart" [class.filled]="isInWishlist(movie.id)"></i>
+            <button
+              #favoriteBtn
+              type="button"
+              class="btn btn-outline-light btn-action favorite-btn"
+              title="Add to Favorites"
+              (click)="toggleWishlist(movie)"
+            >
+              <i class="fas fa-heart" [style.color]="wishlistMovies.has(movie.id) ? '#e31212' : '#ffffff'"></i>
+              {{ wishlistMovies.has(movie.id) ? 'Remove from Favorites' : 'Add to Favorites' }}
             </button>
           </div>
         </div>

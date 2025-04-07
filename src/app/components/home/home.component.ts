@@ -9,11 +9,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    RouterModule
-  ],
+  imports: [CommonModule, HttpClientModule, RouterModule],
   providers: [MovieService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
@@ -26,15 +22,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   isLoading = false;
   private slideInterval: any;
   private wishlistSubscription: Subscription;
-  wishlistMovies: Set<number> = new Set();
+  wishlistMovies = new Set<number>();
 
   constructor(
     private movieService: MovieService,
     private wishlistService: WishlistService,
     private cd: ChangeDetectorRef
   ) {
-    this.wishlistSubscription = this.wishlistService.wishlist$.subscribe(movies => {
-      this.wishlistMovies = new Set(movies.map(m => m.id));
+    // Initialize wishlist state
+    this.wishlistSubscription = this.wishlistService.wishlist$.subscribe({
+      next: (movies) => {
+        this.wishlistMovies = new Set(movies.map(m => m.id));
+        this.cd.detectChanges();
+      }
     });
   }
 
@@ -47,17 +47,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
     }
-    this.wishlistSubscription.unsubscribe();
+    if (this.wishlistSubscription) {
+      this.wishlistSubscription.unsubscribe();
+    }
   }
 
-  toggleWishlist(movie: any) {
-    if (this.isInWishlist(movie.id)) {
-      this.wishlistService.removeFromWishlist(movie.id);
-    } else {
-      this.wishlistService.addToWishlist(movie);
+  async toggleWishlist(movie: any) {
+    try {
+      if (this.isInWishlist(movie.id)) {
+        await this.wishlistService.removeFromWishlist(movie.id);
+      } else {
+        await this.wishlistService.addToWishlist(movie);
+      }
+    } catch (error) {
+      console.error('Error updating wishlist:', error);
     }
-    // Force change detection
-    this.cd.detectChanges();
   }
 
   isInWishlist(movieId: number): boolean {

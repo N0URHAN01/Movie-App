@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 import { TvShowDetailsComponent } from './tv-show-details/tv-show-details.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TvShowComponent } from './tv-show/tv-show.component';
@@ -17,9 +17,14 @@ export const routes: Routes = [
     {
       path: 'wishlist',
       component: WishlistComponent
-    },  // Added comma here
+    },
     { path: 'movie/:id', component: MovieDetailsComponent, title: 'Movie Details' },
     { path: 'movie/:id/reviews', component: MovieReviewsComponent, title: 'Movie Reviews' },
+    { 
+      path: 'search-results',
+      loadComponent: () => import('./components/search-results/search-results.component')
+        .then(m => m.SearchResultsComponent)
+    },  // Added comma here
     { path: '**', component: NotFoundComponent, title: "Error 404 not found" }
 ];
 
