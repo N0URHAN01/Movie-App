@@ -2,21 +2,42 @@
   <h2 class="search-title">Search Results for "{{ searchQuery }}"</h2>
   <div class="row">
     <div class="col-md-3 mb-4" *ngFor="let movie of searchResults">
-      <div class="card">
-        <a [routerLink]="['/movie', movie.id]">
-          <img 
-            [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" 
-            class="card-img-top" 
-            [alt]="movie.title"
-            *ngIf="movie.poster_path"
-          >
-          <div class="no-image" *ngIf="!movie.poster_path">
-            No Image Available
-          </div>
-        </a>
+      <div class="card h-100">
+        <div class="position-relative">
+          <a [routerLink]="['/movie', movie.id]">
+            <img 
+              [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" 
+              class="card-img-top" 
+              [alt]="movie.title"
+              *ngIf="movie.poster_path"
+            >
+            <div class="no-image" *ngIf="!movie.poster_path">
+              No Image Available
+            </div>
+          </a>
+          <span class="rating-badge"
+                [attr.data-rating]="movie.vote_average * 10 >= 70 ? 'high' :
+                                movie.vote_average * 10 >= 50 ? 'medium' : 'low'"
+                [style.--rating-percent]="(movie.vote_average * 10) + '%'">
+            {{ (movie.vote_average * 10) | number:'1.0-0' }}%
+          </span>
+        </div>
         <div class="card-body">
-          <h5 class="card-title">{{ movie.title }}</h5>
-          <p class="card-text">{{ movie.release_date | date:'yyyy' }}</p>
+          <h5 class="card-title">
+            <a [routerLink]="['/movie', movie.id]" class="movie-title-link">{{ movie.title }}</a>
+          </h5>
+          <div class="date-wishlist-container">
+            <p class="release-date">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
+            <button
+              type="button"
+              class="btn btn-outline-light btn-action favorite-btn"
+              title="Add to Favorites"
+              (click)="toggleWishlist(movie)"
+            >
+              <i class="fas fa-heart" [style.color]="wishlistMovies.has(movie.id) ? '#e31212' : '#ffffff'"></i>
+              {{ wishlistMovies.has(movie.id) ? 'Remove from Favorites' : 'Add to Favorites' }}
+            </button>
+          </div>
         </div>
       </div>
     </div>

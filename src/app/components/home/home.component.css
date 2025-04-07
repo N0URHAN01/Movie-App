@@ -25,13 +25,50 @@
 }
 
 .card-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  white-space: nowrap;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 0;
-  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  height: 2.8em;
+}
+
+.movie-title-link {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.movie-title-link:hover {
+  color: #e31221;
+  text-shadow: 0 0 20px rgba(227, 18, 33, 0.3);
+}
+
+.movie-title-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #e31221;
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.movie-title-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .date-wishlist-container {
@@ -703,5 +740,107 @@
   margin-top: 12px;
   gap: 12px;
 }
+.search-wrapper {
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
+  padding: 7rem 0;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
 
-/* Remove or comment out the old wishlist button styles */
+.search-section {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+:host ::ng-deep .search-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  gap: 15px;
+}
+
+:host ::ng-deep .search-input {
+  width: 100%;
+  height: 75px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.25rem;
+  padding: 0 35px;
+  border-radius: 16px;
+}
+
+:host ::ng-deep .search-button {
+  position: relative;
+  right: auto;
+  top: auto;
+  transform: none;
+  height: 75px;
+  min-width: 120px;
+  background: #e31221;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+:host ::ng-deep .search-button:hover {
+  background: #ff1526;
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(227, 18, 18, 0.3);
+}
+
+:host ::ng-deep .search-button i {
+  font-size: 1.2rem;
+}
+
+.search-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, #ffffff, #e6e6e6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 15px rgba(255, 255, 255, 0.1);
+}
+
+.search-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.3rem;
+  margin-bottom: 3.5rem;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .search-wrapper {
+    padding: 5rem 0;
+  }
+
+  .search-title {
+    font-size: 2.5rem;
+  }
+
+  :host ::ng-deep .search-container {
+    flex-direction: column;
+    background: transparent;
+  }
+
+ 
+
+  :host ::ng-deep .search-button {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    transform: none;
+    border-radius: 12px;
+  }
+}

@@ -4,12 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
 import { WishlistService } from '../../services/wishlist.service';
+import { SearchComponent } from '../search/search.component';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule],
+  imports: [CommonModule, HttpClientModule, RouterModule,SearchComponent],
   providers: [MovieService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
