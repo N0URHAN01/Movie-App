@@ -1,63 +1,130 @@
 <div *ngIf="movie" class="movie-details">
-  <div class="movie-header">
-    <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" [alt]="movie.title" />
-    <div class="movie-info">
-      <h1>{{ movie.title }}</h1>
-      <p>{{ movie.overview }}</p>
-      <p><strong>Release Date:</strong> {{ movie.release_date | date }}</p>
-      <p><strong>Rating:</strong> {{ movie.vote_average }}</p>
-
-      <!-- Add to Favorites Button -->
-      <button
-        type="button"
-        class="btn btn-outline-light btn-action me-2"
-        title="Add to Favorites"
-        (click)="toggleFavorite(movie)"
-      >
-        <i class="fas fa-heart" [class.text-danger]="isFavorite(movie.id)"></i>
-        {{ isFavorite(movie.id) ? 'Remove from Favorites' : 'Add to Favorites' }}
-      </button>
-    </div>
+  <div class="movie-backdrop">
+    <img [src]="'https://image.tmdb.org/t/p/original' + movie.backdrop_path" [alt]="movie.title" />
+    <div class="backdrop-overlay"></div>
   </div>
-
-  <!-- Reviews Section -->
-  <div class="movie-reviews">
-    <h2>Reviews</h2>
-    <div *ngIf="reviews.length > 0; else noReviews">
-      <div class="row">
-        <div class="col-md-4 mb-3" *ngFor="let review of reviews.slice(0, 3)">
-          <div class="card review-card h-100">
-            <div class="card-body">
-              <h5 class="card-title">{{ review.author }}</h5>
-              <p class="card-text">{{ review.content | slice:0:150 }}...</p>
-              <a [routerLink]="['/movie', movie.id, 'reviews']" class="btn btn-link">Read More</a>
+  
+  <div class="movie-content">
+    <div class="container">
+      <div class="movie-header">
+        <div class="poster-container">
+          <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" [alt]="movie.title" class="movie-poster" />
+        </div>
+        
+        <div class="movie-info">
+          <h1 class="movie-title">{{ movie.title }}</h1>
+          
+          <div class="movie-meta">
+            <span class="release-year">{{ movie.release_date | date:'yyyy' }}</span>
+            <span class="separator">•</span>
+            <div class="rating-circle"
+                 [attr.data-rating]="movie.vote_average >= 7 ? 'high' : 
+                                    movie.vote_average >= 5 ? 'medium' : 'low'"
+                 [style.--rating-percent]="(movie.vote_average * 10) + '%'">
+              {{ (movie.vote_average * 10) | number:'1.0-0' }}%
+            </div>
+          </div>
+  
+          <p class="movie-overview">{{ movie.overview }}</p>
+  
+          <div class="movie-actions">
+            <button class="watch-trailer">
+              <i class="fas fa-play"></i>
+              Watch Trailer
+            </button>
+            
+            <button
+              type="button"
+              class="favorite-btn"
+              title="Add to Favorites"
+              (click)="toggleFavorite(movie)"
+            >
+              <i class="fas fa-heart" [class.filled]="isFavorite(movie.id)"></i>
+              {{ isFavorite(movie.id) ? 'Remove from Favorites' : 'Add to Favorites' }}
+            </button>
+          </div>
+  
+          <div class="movie-details-meta">
+            <div class="meta-item">
+              <span class="label">Release Date</span>
+              <span class="value">{{ movie.release_date | date:'mediumDate' }}</span>
+            </div>
+            <div class="meta-item">
+              <span class="label">Rating</span>
+              <span class="value">{{ movie.vote_average | number:'1.1-1' }} / 10</span>
             </div>
           </div>
         </div>
       </div>
-      <div *ngIf="reviews.length > 3" class="text-center mt-3">
-        <a [routerLink]="['/movie', movie.id, 'reviews']" class="btn btn-primary">View All Reviews</a>
-      </div>
-    </div>
-    <ng-template #noReviews>
-      <p>No reviews available for this movie.</p>
-    </ng-template>
-  </div>
-
-  <!-- Recommendations Section -->
-  <div class="movie-recommendations">
-    <h2>Recommendations</h2>
-    <div class="row">
-      <div class="col-md-3 mb-4" *ngFor="let rec of recommendations">
-        <div class="recommendation-card">
-          <a [routerLink]="['/movie', rec.id]">
-            <img [src]="'https://image.tmdb.org/t/p/w500' + rec.poster_path" class="img-fluid rounded mb-2" [alt]="rec.title" />
-            <h5 class="recommendation-title">{{ rec.title }}</h5>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="badge bg-primary">{{ rec.vote_average | number:'1.1-1' }}</span>
-              <small class="text-muted">{{ rec.release_date | date:'yyyy' }}</small>
+  
+      <!-- Reviews Section -->
+      <div class="movie-reviews">
+        <h2>Reviews</h2>
+        <div *ngIf="reviews.length > 0; else noReviews">
+          <div class="row">
+            <div class="col-md-4 mb-3" *ngFor="let review of reviews.slice(0, 3)">
+              <div class="card review-card h-100">
+                <div class="card-body">
+                  <div class="review-author">
+                    <i class="fas fa-user-circle"></i>
+                    <h5 class="card-title">{{ review.author }}</h5>
+                  </div>
+                  <p class="card-text">{{ review.content | slice:0:150 }}...</p>
+                  <button class="read-more-btn" [routerLink]="['/movie', movie.id, 'reviews']">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-          </a>
+          </div>
+          <div *ngIf="reviews.length > 3" class="text-center mt-4">
+            <button class="view-all-btn" [routerLink]="['/movie', movie.id, 'reviews']">
+              View All Reviews
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <ng-template #noReviews>
+          <p>No reviews available for this movie.</p>
+        </ng-template>
+      </div>
+  
+      <!-- Recommendations Section -->
+      <div class="movie-recommendations">
+        <h2>Recommendations</h2>
+        <div class="row">
+          <div class="col-md-3 mb-4" *ngFor="let rec of recommendations">
+            <div class="card recommendation-card">
+              <div class="position-relative">
+                <a [routerLink]="['/movie', rec.id]">
+                  <img [src]="'https://image.tmdb.org/t/p/w500' + rec.poster_path" [alt]="rec.title" />
+                  <span class="rating-badge"
+                        [attr.data-rating]="rec.vote_average >= 7 ? 'high' : 
+                                         rec.vote_average >= 5 ? 'medium' : 'low'"
+                        [style.--rating-percent]="(rec.vote_average * 10) + '%'">
+                      {{ (rec.vote_average * 10) | number:'1.0-0' }}%
+                    </span>
+                </a>
+                <button
+                  type="button"
+                  class="wishlist-btn"
+                  title="Add to Favorites"
+                  (click)="toggleFavorite(rec)"
+                >
+                  <i class="fas fa-heart" [class.filled]="isFavorite(rec.id)"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a [routerLink]="['/movie', rec.id]" class="movie-title-link">{{ rec.title }}</a>
+                </h5>
+                <div class="date-wishlist-container">
+                  <p class="release-date">{{ rec.release_date | date:'MMM dd, yyyy' }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

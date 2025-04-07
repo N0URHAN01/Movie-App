@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LanguageService } from '../../services/language.service';
-import { SearchComponent } from '../search/search.component';
+
 import { WishlistService } from '../../services/wishlist.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { WishlistService } from '../../services/wishlist.service';
   imports: [
     RouterModule, 
     CommonModule,
-    SearchComponent  // Added SearchComponent to imports
+  
   ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
