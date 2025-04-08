@@ -1,0 +1,322 @@
+@if(tvshow) {
+<div class="tv-details">
+  <!-- Backdrop section -->
+  <div
+    class="backdrop"
+    [style.backgroundImage]="
+      'linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, 0) 100%), url(https://image.tmdb.org/t/p/original' +
+      tvshow.backdrop_path +
+      ')'
+    "
+  >
+    <div class="container">
+      <div class="row align-items-center py-5">
+        <!-- Poster -->
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="poster-container">
+            <img
+              [src]="'https://image.tmdb.org/t/p/w500' + tvshow.poster_path"
+              class="img-fluid rounded shadow-lg poster-img"
+              [alt]="tvshow.name"
+              (error)="handleImageError($event)"
+            />
+          </div>
+        </div>
+
+        <!-- Details -->
+        <div class="col-md-8 text-white">
+          <div class="d-flex align-items-center mb-2">
+            <div
+              class="d-flex justify-content-between align-items-center w-100"
+            >
+              <div class="title">
+                <h1 class="me-3 mb-0">{{ tvshow.name }}</h1>
+                <span class="release-year text-muted"
+                  >({{
+                    (tvshow.first_air_date | date : "yyyy") || "N/A"
+                  }})</span
+                >
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-outline-light btn-action me-2"
+                title="Mark as favorite"
+              >
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Facts -->
+          <div class="facts mb-3">
+            <span class="certification me-2">TV-14</span>
+            <span class="me-2">{{
+              (tvshow.first_air_date | date : "MMM d, y") || "N/A"
+            }}</span>
+            <span class="me-2">
+              @for(genre of tvshow.genres; track genre.id; let last = $last) {
+              {{ genre.name }}{{ !last ? "," : "" }}
+              }
+            </span>
+            @if( tvshow&& tvshow.episode_run_time){
+            <span>{{ tvshow.episode_run_time[0] || 0 }}m</span>
+            }@else {
+            <span>0m</span>
+            }
+          </div>
+
+          <!-- Action buttons -->
+          <div class="action-buttons mb-4">
+            <div class="d-flex align-items-center">
+              <!-- Rating circle -->
+              <div class="rating-circle me-3">
+                <div class="percentage">
+                  {{ (tvshow.vote_average * 10).toFixed(0) }}%
+                </div>
+              </div>
+
+              <!-- User score -->
+              <div class="user-score me-4">
+                <div>User</div>
+                <div>Score</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tagline -->
+          @if(tvshow.tagline) {
+          <h3 class="tagline mb-3">
+            <em>{{ tvshow.tagline }}</em>
+          </h3>
+          }
+
+          <!-- Overview -->
+          <div class="overview mb-4">
+            <h4 class="mb-2">Overview</h4>
+            <p>{{ tvshow.overview || "No overview available." }}</p>
+          </div>
+
+          <!-- Creators -->
+          @if(tvshow.created_by && tvshow.created_by.length > 0) {
+          <div class="creators mb-4">
+            <div class="row">
+              @for(creator of tvshow.created_by; track creator.name) {
+              <div class="col-6 col-sm-4 col-md-3">
+                <div class="creator text-left" style="text-align: left">
+                  <h5
+                    class="creator-namem my-1"
+                    style="
+                      text-align: left;
+                      font-size: 16px;
+                      color: rgb(255, 255, 255);
+                      line-height: 24px;
+                      font-weight: 700;
+                    "
+                  >
+                    {{ creator.name }}
+                  </h5>
+                  <p
+                    class="mb-2"
+                    style="
+                      text-align: left;
+                      font-size: 14px;
+                      color: rgb(255, 255, 255);
+                      line-height: 22px;
+                      font-weight: 400;
+                    "
+                  >
+                    Creator
+                  </p>
+                </div>
+                <!-- 
+                Family
+"Source Sans Pro", Arial, sans-serif
+Style
+normal
+Weight
+700
+Color
+rgba(255, 255, 255, 0.7)
+Size
+16px
+Line Height
+24px -->
+              </div>
+              }
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="container pb-5">
+    <div class="row">
+      <!-- Left column -->
+      <div class="col-lg-8">
+        <!-- Additional details -->
+        <div class="additional-details mb-0">
+          @if(tvshow.next_episode_to_air) {
+          <!-- Next Episode Card -->
+          <div class="next-episode mt-4">
+            <h5>Next Episode</h5>
+            <div class="card border-0">
+              <div class="card-body row justify-content-between align-items-center g-5">
+                <div class="Episode-cover col-md-2">
+                  <div class="img-cont">
+                    <img
+                      [src]="'https://image.tmdb.org/t/p/w500' + tvshow.poster_path"
+                      class="img-fluid rounded mb-2"
+                      [alt]="tvshow.next_episode_to_air.name"
+                      (error)="handleImageError($event)"
+                    />
+                  </div>
+                </div>
+                <div class="info col-md-10">
+                  <h6 class="card-title">
+                    Episode {{ tvshow.next_episode_to_air.episode_number }}:
+                    {{ tvshow.next_episode_to_air.name }}
+                  </h6>
+                  <p class="card-text">{{ tvshow.next_episode_to_air.overview || "No overview available." }}</p>
+                  <p class="card-text">
+                    <small>Air Date: {{ tvshow.next_episode_to_air.air_date | date : "MMM d, y" }}</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+        <!-- Recommendations Section -->
+        <div class="container py-4" *ngIf="recommendations.length > 0">
+          <h3 class="section-title mb-4">Recommendations</h3>
+
+          @if(isLoadingRecs) {
+          <div class="text-center my-3">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          } @if(errorRecsMessage) {
+          <div class="alert alert-warning" role="alert">
+            {{ errorRecsMessage }}
+          </div>
+          }
+
+          <div class="row g-4">
+            @for(rec of recommendations; track rec.id) {
+            <div class="col-6 col-md-4 col-lg-2">
+              <div class="recommendation-card">
+                <a [routerLink]="['/tv-shows', rec.id]">
+                  <img
+                    [src]="'https://image.tmdb.org/t/p/w500' + rec.poster_path"
+                    class="img-fluid rounded mb-2"
+                    [alt]="rec.name"
+                    (error)="handleImageError($event)"
+                  />
+                  <h5 class="recommendation-title">{{ rec.name }}</h5>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="badge bg-primary">{{
+                      rec.vote_average | number : "1.1-1"
+                    }}</span>
+                    <small class="text-muted">{{
+                      rec.first_air_date | date : "yyyy"
+                    }}</small>
+                  </div>
+                </a>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="col-lg-4">
+        <!-- Social links -->
+        <div class="social-links mb-4">
+          <h4 class="section-title">Social</h4>
+          <div class="d-flex">
+            <a
+              href="#"
+              class="btn btn-outline-dark me-2 social-btn"
+              title="Visit homepage"
+            >
+              <i class="fas fa-globe"></i>
+            </a>
+            <a
+              href="#"
+              class="btn btn-outline-dark me-2 social-btn"
+              title="Facebook"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a
+              href="#"
+              class="btn btn-outline-dark me-2 social-btn"
+              title="Twitter"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              href="#"
+              class="btn btn-outline-dark me-2 social-btn"
+              title="Instagram"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="statistics mb-4">
+          <h4 class="section-title">Statistics</h4>
+          <div class="card">
+            <div class="card-body">
+              <div class="stat-item mb-3">
+                <div class="stat-label">Original Release</div>
+                <div class="stat-value">
+                  {{ tvshow.first_air_date }}
+                </div>
+              </div>
+              <div class="stat-item mb-3">
+                <div class="stat-label">Last Air Date</div>
+                <div class="stat-value">
+                  {{ tvshow.last_air_date }}
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">Popularity</div>
+                <div class="stat-value">
+                  {{ tvshow.popularity | number : "1.0-0" }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- Loading indicator -->
+@if(isLoading) {
+<div class="text-center my-5 py-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+}
+
+<!-- Error message -->
+@if(errorMessage) {
+<div class="alert alert-danger container mt-5" role="alert">
+  {{ errorMessage }}
+</div>
+}

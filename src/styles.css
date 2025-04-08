@@ -1,1 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #141414; 
+  color: #ffffff; 
+}
+/* For LTR (default) */
+[dir="ltr"] .navbar-nav {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+/* For RTL */
+[dir="rtl"] .navbar-nav {
+  margin-left: auto;
+  margin-right: 0;
+}
+[dir="rtl"] .input-group {
+  direction: ltr;
+}
+
+.wishlist-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  color: white;
+  font-size: 1.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.wishlist-btn:hover {
+  color: #dc3545;
+}
+
+.wishlist-btn .text-dark {
+  color: #000 !important;
+}
+
+.rating-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,42 @@
+<div class="card h-100">
+  <img [src]="productItem.images[0]" class="card-img-top p-2" [alt]="productItem.title" style="height: 150px; object-fit: contain;" />  <div class="card-body">
+    @if(productItem.availabilityStatus == "In Stock"){
+    <span class="badge text-bg-success">In Stock</span>
+    }@else {
+    <span class="badge text-bg-warning">Out of Stock</span>
+    }
+    
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h5 class="card-title mb-0">{{ productItem.title }}</h5>
+      <span class="fw-bold text-primary">${{productItem.price}}</span>
+    </div>
+    
+    <button class="btn btn-link wishlist-btn" (click)="toggleWishlist(movie)">
+      @if (isInWishlist(movie.id)) {
+        <i class="fas fa-heart text-danger"></i>
+      } @else {
+        <i class="far fa-heart"></i>
+      }
+    </button>
+    
+    <p class="card-text">{{ productItem.description }}</p>
+    
+    <!-- Review Stars using Unicode -->
+    <div class="mt-2">
+      <span class="text-warning" style="letter-spacing: 3px;">
+        @for(star of [1,2,3,4,5]; track $index) {
+          @if(star <= productItem.rating) {
+            ★
+          } @else {
+            ☆
+          }
+        }
+      </span>
+    </div>
+  </div>
+  
+  <div class="card-footer">
+    <button class="btn btn-danger" (click)="handleDeleteProduct()">Delete product</button>
+    <span><button class="btn btn-primary mb-0">Add to Cart</button></span>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+.search-title {
+  color: white;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-img-top {
+  height: 400px;
+  object-fit: cover;
+}
+
+.no-image {
+  height: 400px;
+  background: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
+}
+
+.movie-title-link {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.movie-title-link:hover {
+  color: #e31212;
+}
+
+.rating-badge {
+  position: absolute;
+  bottom: -15px;
+  left: 10px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+  z-index: 2;
+}
+
+.rating-badge::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--rating-color) var(--rating-percent),
+    #2c2c2c var(--rating-percent)
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent 70%, #000 71%);
+  mask: radial-gradient(farthest-side, transparent 70%, #000 71%);
+}
+
+.rating-badge[data-rating="high"] {
+  --rating-color: #3cba54;
+}
+
+.rating-badge[data-rating="medium"] {
+  --rating-color: #f4c20d;
+}
+
+.rating-badge[data-rating="low"] {
+  --rating-color: #db3236;
+}
+
+.date-wishlist-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 12px;
+}
+
+.release-date {
+  color: #999;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.favorite-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.favorite-btn:hover {
+  background: rgba(227, 18, 18, 0.1);
+  border-color: #e31212;
+}
+
+.favorite-btn .fa-heart {
+  transition: transform 0.2s ease;
+}
+
+.favorite-btn:hover .fa-heart {
+  transform: scale(1.1);
+}

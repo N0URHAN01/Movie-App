@@ -1,0 +1,132 @@
+.movie-details {
+  padding: 20px;
+  color: white;
+}
+
+.movie-header {
+  display: flex;
+  gap: 20px;
+}
+
+.movie-header img {
+  width: 300px;
+  border-radius: 8px;
+}
+
+.movie-info {
+  flex: 1;
+}
+
+.movie-reviews, .movie-recommendations {
+  margin-top: 40px;
+}
+
+.recommendation img {
+  width: 150px;
+  border-radius: 8px;
+}
+
+.recommendation-card {
+  transition: transform 0.3s ease;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-8px);
+}
+
+.recommendation-title {
+  font-size: 0.9rem;
+  color: white;
+  margin: 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recommendation-card .badge {
+  background-color: #e31212 !important;
+  border: none;
+}
+
+.recommendation-card .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Review card styling */
+.review-card {
+  background-color: #1a1a1a;
+  border: 1px solid #2c2c2c;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Card title styling */
+.review-card .card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e31212;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Review content styling */
+.review-card .card-text {
+  font-size: 0.95rem;
+  color: #d1d1d1;
+  line-height: 1.6;
+  max-height: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+/* Card footer styling */
+.review-card .card-footer {
+  background-color: #2c2c2c;
+  border-top: 1px solid #3c3c3c;
+  font-size: 0.85rem;
+  color: #a0a0a0;
+  text-align: right;
+}
+
+.btn-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid #e31212;
+  color: #e31212;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-action:hover {
+  background: #e31212;
+  color: white;
+}
+
+.btn-action .fa-heart {
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.btn-action .fa-heart.text-danger {
+  color: #e31212;
+}

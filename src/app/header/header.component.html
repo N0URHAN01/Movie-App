@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <span class="navbar-brand">Products App</span>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          routerLink="/"
+          routerLinkActive="active_route"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Products List</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/add-product"
+          routerLinkActive="active_route"
+          >Add Product Template</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/add-product-reactive"
+          routerLinkActive="active_route"
+          >Add Product Reactive</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/product-counter"
+          routerLinkActive="active_route"
+          >Product counter : {{counter}}</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/settings"
+          routerLinkActive="active_route"
+          >Settings</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- /users
+/users/add
+/users/delete
+/users/view -->

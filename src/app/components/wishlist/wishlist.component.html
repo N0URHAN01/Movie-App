@@ -1,0 +1,46 @@
+<div class="container py-4">
+  <div class="row">
+    @if (wishlist$ | async; as movies) {
+      @if (movies.length > 0) {
+        @for (movie of movies; track movie.id) {
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="position-relative">
+                <a [routerLink]="['/movie', movie.id]">
+                  <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" 
+                       [alt]="movie.title" 
+                       class="card-img-top">
+                </a>
+                <span class="rating-badge" 
+                      [attr.data-rating]="movie.vote_average * 10 >= 70 ? 'high' : 
+                                      movie.vote_average * 10 >= 50 ? 'medium' : 'low'"
+                      [style.--rating-percent]="(movie.vote_average * 10) + '%'">
+                  {{ (movie.vote_average * 10) | number:'1.0-0' }}%
+                </span>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <p class="release-date">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
+                <button class="btn btn-danger btn-sm" (click)="removeFromWishlist(movie.id)">
+                  <i class="fas fa-trash me-1"></i>Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="col-12 text-center py-5 empty-wishlist">
+          <div class="heart-broken-icon">
+            <i class="fas fa-heart"></i>
+            <div class="heart-line"></div>
+          </div>
+          <h3 class="text-white mt-3">Your wishlist is empty</h3>
+          <p class="text-muted">Movies you add to your wishlist will appear here</p>
+          <a routerLink="/home" class="btn btn-danger mt-3">
+            <i class="fas fa-arrow-left me-2"></i>Browse Movies
+          </a>
+        </div>
+      }
+    }
+  </div>
+</div>

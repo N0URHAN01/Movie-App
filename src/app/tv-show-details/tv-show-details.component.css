@@ -1,0 +1,294 @@
+.tv-details {
+  background-color: #141414;
+  min-height: 100vh;
+}
+
+.backdrop {
+  background-size: cover;
+  background-position: center;
+  padding: 60px 0;
+  position: relative;
+}
+
+.poster-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.poster-img {
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.title h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.release-year {
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.facts {
+  font-size: 1rem;
+  margin: 1.5rem 0;
+}
+
+.certification {
+  background-color: #e31212;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.genre-tag {
+  margin-right: 8px;
+  opacity: 0.9;
+}
+
+.rating-circle {
+  width: 60px;
+  height: 60px;
+  background-color: #e31212;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.user-score {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.tagline {
+  font-style: italic;
+  opacity: 0.9;
+  font-size: 1.2rem;
+}
+
+.overview h4 {
+  color: #e31212;
+  font-weight: 600;
+}
+
+.overview p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Next Episode Card */
+.next-episode h5 {
+  color: #e90606be;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.next-episode .card {
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.next-episode .card-title {
+  color: #e31212;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.next-episode .card-text {
+  color: #ffffff;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.next-episode .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.next-episode .card-body {
+  padding: 1.5rem;
+}
+
+.next-episode .card-title {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.next-episode .card-text {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.next-episode .text-muted {
+  color: #e31212 !important;
+  font-weight: 500;
+}
+
+.next-episode .img-cont {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Recommendations Section */
+.section-title {
+  color: #e31212;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.recommendation-card {
+  transition: transform 0.3s ease;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.recommendation-card a {
+  text-decoration: none;
+  color: white;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-8px);
+}
+
+.recommendation-title {
+  font-size: 0.9rem;
+  color: white;
+  margin: 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recommendation-card .badge {
+  background-color: #e31212 !important;
+  border: none;
+}
+
+.recommendation-card .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.spinner-border.text-primary {
+  color: #e31212 !important;
+}
+
+.alert-warning {
+  background-color: #1a1a1a;
+  border-color: #e31212;
+  color: white;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-8px);
+}
+
+.recommendation-title {
+  font-size: 0.9rem;
+  color: white;
+  margin: 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recommendation-card .badge {
+  background-color: #e31212 !important;
+  border: none;
+}
+
+.recommendation-card .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.spinner-border.text-primary {
+  color: #e31212 !important;
+}
+
+.alert-warning {
+  background-color: #1a1a1a;
+  border-color: #e31212;
+  color: white;
+}
+
+/* Social Links */
+.social-btn {
+  background-color: #1a1a1a;
+  border: 2px solid #e31212;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+  background-color: #e31212;
+  color: white;
+}
+
+/* Statistics Card */
+.statistics .card {
+  background-color: #1a1a1a;
+  border: none;
+  border-radius: 12px;
+  color: white;
+}
+
+.stat-label {
+  color: #e31212;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+}
+
+/* Loading Spinner */
+.spinner-border {
+  color: #e31212 !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .title h1 {
+    font-size: 2rem;
+  }
+  
+  .facts {
+    font-size: 0.9rem;
+  }
+  
+  .rating-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+}

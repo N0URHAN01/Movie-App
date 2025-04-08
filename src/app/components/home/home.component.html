@@ -1,0 +1,158 @@
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-slider">
+    <div class="slide" *ngFor="let movie of movies.slice(0, 3); let i = index"
+         [class.active]="currentSlide === i"
+         [style.opacity]="currentSlide === i ? 1 : 0"
+         [style.visibility]="currentSlide === i ? 'visible' : 'hidden'">
+      <div class="slide-content">
+        <div class="movie-info">
+          <div class="movie-meta-top">
+            <span class="year">{{ movie.release_date | date:'yyyy' }}</span>
+            <span class="duration">{{ movie.runtime }} min</span>
+            <span class="rating-value">{{ movie.vote_average * 10 }}%</span>
+          </div>
+          <h1 class="movie-title">{{ movie.title }}</h1>
+          <p class="movie-overview">{{ movie.overview }}</p>
+          <div class="movie-actions">
+            <button class="watch-trailer">
+              <i class="fas fa-play"></i>
+              Watch trailer
+            </button>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+        <div class="movie-poster">
+          <img [src]="getImageUrl(movie.backdrop_path)" [alt]="movie.title">
+        </div>
+        <div class="slide-overlay"></div>
+      </div>
+    </div>
+    <div class="slide-indicators">
+      <div class="indicator" *ngFor="let movie of movies.slice(0, 3); let i = index"
+           [class.active]="currentSlide === i"
+           (click)="setCurrentSlide(i)">
+      </div>
+    </div>
+  </div>
+</section>
+<section class="search-wrapper">
+  <div class="search-section">
+    <div class="container">
+      <h2 class="search-title">Discover Your Next Favorite Movie</h2>
+      <p class="search-subtitle">Search through millions of movies and find something you'll love</p>
+      <app-search></app-search>
+    </div>
+  </div>
+</section>
+
+<!-- Movies List Section -->
+<div class="section-header">
+  <h2 class="section-title">Popular Movies</h2>
+  <div class="section-divider"></div>
+</div>
+
+<div class="container mt-4">
+
+  @if(isLoading) {
+    <div class="loading-spinner">
+      <div class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  }
+
+  <!-- Movies grid -->
+  <div class="row">
+    <div class="col-md-3 mb-4" *ngFor="let movie of movies">
+      <div class="card h-100">
+        <div class="position-relative">
+          <a [routerLink]="['/movie', movie.id]">
+            <img [src]="getImageUrl(movie.poster_path)" class="card-img-top" [alt]="movie.title">
+          </a>
+          <span class="rating-badge"
+                [attr.data-rating]="movie.vote_average * 10 >= 70 ? 'high' :
+                                movie.vote_average * 10 >= 50 ? 'medium' : 'low'"
+                [style.--rating-percent]="(movie.vote_average * 10) + '%'">
+                {{ (movie.vote_average * 10) | number:'1.0-0' }}%
+              </span>
+              
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <a [routerLink]="['/movie', movie.id]" class="movie-title-link">{{ movie.title }}</a>
+          </h5>
+          <div class="date-wishlist-container">
+            <p class="release-date">{{ movie.release_date | date:'MMM dd, yyyy' }}</p>
+            <button
+              #favoriteBtn
+              type="button"
+              class="btn btn-outline-light btn-action favorite-btn"
+              title="Add to Favorites"
+              (click)="toggleWishlist(movie)"
+            >
+              <i class="fas fa-heart" [style.color]="wishlistMovies.has(movie.id) ? '#e31212' : '#ffffff'"></i>
+              {{ wishlistMovies.has(movie.id) ? 'Remove from Favorites' : 'Add to Favorites' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <nav aria-label="Movies pagination">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+        </li>
+
+        <li class="page-item" *ngIf="currentPage > 2">
+          <button class="page-link" (click)="onPageChange(1)">1</button>
+        </li>
+
+        <li class="page-item" *ngIf="currentPage > 3">
+          <span class="page-link">...</span>
+        </li>
+
+        <li class="page-item" *ngIf="currentPage > 1">
+          <button class="page-link" (click)="onPageChange(currentPage - 1)">
+            {{ currentPage - 1 }}
+          </button>
+        </li>
+
+        <li class="page-item active">
+          <button class="page-link">{{ currentPage }}</button>
+        </li>
+
+        <li class="page-item" *ngIf="currentPage < totalPages">
+          <button class="page-link" (click)="onPageChange(currentPage + 1)">
+            {{ currentPage + 1 }}
+          </button>
+        </li>
+
+        <li class="page-item" *ngIf="currentPage < totalPages - 2">
+          <span class="page-link">...</span>
+        </li>
+
+        <li class="page-item" *ngIf="currentPage < totalPages - 1">
+          <button class="page-link" (click)="onPageChange(totalPages)">
+            {{ totalPages }}
+          </button>
+        </li>
+
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Add search section -->
+

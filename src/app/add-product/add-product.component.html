@@ -1,0 +1,67 @@
+<!-- <p>Username: {{username}}</p>
+<input class="form-control" [(ngModel)]="username" /> -->
+<!-- <input class="form-control" [value]="username" (keyup)=""/> -->
+
+<h3>Add Product | Template forms</h3>
+<hr />
+
+<form #reicpeForm="ngForm" (ngSubmit)="handleSubmitForm(reicpeForm)">
+  <div class="mb-3">
+    <label for="productNameId" class="form-label">Product name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="productNameId"
+      aria-describedby="productEmailHelp"
+      name="productName"
+      [(ngModel)]="formValue.productName"
+      required
+      minlength="3"
+      #productName="ngModel"
+    />
+    @if(productName.touched && productName.invalid){
+    <div id="productEmailHelp" class="form-text text-danger">
+      @if(productName.hasError('required')){
+      <span>Required</span>
+      } @else if(productName.hasError('minlength')){
+      <span>Min.length should be 3 characters</span>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="descriptionId" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      rows="5"
+      id="descriptionId"
+      name="description"
+      [(ngModel)]="formValue.description"
+      required
+      minlength="10"
+      maxlength="200"
+      #description="ngModel"
+    ></textarea>
+    @if(description.touched && description.invalid){
+    <div id="descriptionHelp" class="form-text text-danger">
+      @if(description.hasError('required')){
+      <span>Required</span>
+      } @else if(description.hasError('minlength')){
+      <span>Min.length should be 10 characters</span>
+      } @else {
+      <span>Max.length should be 200 characters</span>
+      }
+    </div>
+    }
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="reicpeForm.invalid">
+    Submit
+  </button>
+</form>
+
+<!-- FormsModule -->
+<!-- <form #reference="ngForm" (ngSubmit)="handleSubmitFn(reference)"> -->
+<!-- <field name="fieldName" ngModel #fieldName="ngModel"> -->
+
+<!-- ERRORS -->
+<!-- if(fieldName.touched && fieldName.invalid) => .hasError('ErrorType') -->

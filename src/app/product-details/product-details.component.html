@@ -1,0 +1,129 @@
+
+<section class="container-fluid">
+    @if (isLoading) {
+    <section class="d-flex align-items-center justify-content-center w-100 pt-5">
+      <div class="card">
+        <div class="card-body">
+          <h1>Loading...</h1>
+        </div>
+      </div>
+    </section>
+    }@else { @if (product) {
+    <section class="row align-items-center flex-wrap p-4">
+      <div class="col-md-5 col-lg-4">
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <img
+              [src]="product.images[selectedImageIndex]"
+              alt="Main Headphone"
+              class="img-fluid main-image"
+            />
+          </div>
+        </div>
+  
+        <div class="row justify-content-center mt-3">
+          @for (image of product.images; track $index; let i = $index) {
+          <div class="col-auto">
+            <img
+              [src]="image"
+              width="100"
+              alt="Thumbnail"
+              class="thumbnail"
+              [ngClass]="{ border: i == selectedImageIndex }"
+              (click)="changeMainImage(i)"
+            />
+          </div>
+          }
+        </div>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <h2 class="fw-bold">{{ product.title }}</h2>
+        <p class="text-muted">
+          {{ product.description }}
+        </p>
+  
+        <!-- Ratings -->
+        <div class="d-flex align-items-center">
+          <div class="text-warning">
+            @for (star of stars; track $index) {
+            <i class="fa fa-star"></i>
+            }
+          </div>
+          <span class="ms-2 text-muted">({{ product.reviews.length }})</span>
+        </div>
+  
+        <!-- Price Section -->
+        <h3 class="mt-3">
+          <span class="fw-bold text-dark">{{
+            product.price
+              | discount : product.discountPercentage
+          }}</span>
+
+        </h3>
+  
+        <!-- Stock Status -->
+        <span
+          class="badge p-2"
+          [ngClass]="{ 'bg-success': inStock, 'bg-danger': !inStock }"
+          >{{ inStock ? "In stock" : "Out of stock" }}</span
+        >
+  
+        <!-- More Information Section -->
+        <div class="mt-3">
+          <p class="fw-bold">More information</p>
+          <button class="btn btn-light btn-sm me-2">
+            {{ product.category }}
+          </button>
+          <button class="btn btn-light btn-sm">{{ product.brand }}</button>
+        </div>
+  
+        <!-- Quantity Selector -->
+        <div class="d-flex align-items-center mt-4">
+          <button
+            class="btn btn-light border"
+            (click)="decreaseQuantity()"
+            [disabled]="!inStock"
+          >
+            -
+          </button>
+          <span class="mx-3 fw-bold">{{ quantity }}</span>
+          <button
+            class="btn btn-light border"
+            (click)="increaseQuantity()"
+            [disabled]="!inStock"
+          >
+            +
+          </button>
+  
+          <p class="ms-3 text-danger fw-bold">
+            Only <span class="text-warning">{{ product.stock }}</span> Items Left!
+            Don't miss it
+          </p>
+        </div>
+  
+        <!-- Buy Now and Add to Cart Buttons -->
+        <div class="mt-3 d-flex">
+          <button class="btn btn-dark flex-grow-1 me-2" [disabled]="!inStock">
+            Buy Now
+          </button>
+          <button
+            class="btn btn-outline-dark flex-grow-1"
+            (click)="addToCart(product.id)"
+            [disabled]="!inStock"
+          >
+            <i class="fa fa-shopping-cart"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+    </section>
+    }@else {
+    <section class="d-flex align-items-center justify-content-center w-100 pt-5">
+      <div class="card">
+        <div class="card-body">
+          <h1>Product Not Found</h1>
+        </div>
+      </div>
+    </section>
+    } }
+  </section>
+  

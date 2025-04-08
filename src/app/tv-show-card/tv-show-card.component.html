@@ -1,0 +1,22 @@
+<!-- tv-show-card.component.html -->
+<div class="tv-show-card">
+  <a [routerLink]="['/tv-shows', tvshow.id]">
+    <img
+      [src]="'https://image.tmdb.org/t/p/w500' + tvshow.poster_path"
+      class="poster-img"
+      [alt]="tvshow.name"
+      (error)="handleImageError($event)"
+    />
+    <div class="tv-show-info">
+      <h5 class="tv-show-title">{{ tvshow.name }}</h5>
+      <div class="tv-show-meta">
+        <span class="vote-average">{{
+          tvshow.vote_average | number : "1.1-1"
+        }}</span>
+        <span class="release-year">{{
+          (tvshow.first_air_date | date : "yyyy") || "N/A"
+        }}</span>
+      </div>
+    </div>
+  </a>
+</div>

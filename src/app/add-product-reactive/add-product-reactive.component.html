@@ -1,0 +1,47 @@
+<h3>Add Product | Reactive forms</h3>
+<hr />
+
+<form [formGroup]="productForm" (ngSubmit)="handleSubmitForm()">
+  <div class="mb-3">
+    <label for="productNameId" class="form-label">Product name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="productNameId"
+      aria-describedby="productEmailHelp"
+      formControlName="productName"
+    />
+    @if(productForm.controls['productName'].touched &&
+    productForm.controls['productName'].invalid){
+    <div id="productEmailHelp" class="form-text text-danger">
+      @if(productForm.controls['productName'].hasError('required')){
+      <span>Required</span>
+      } @else if(productForm.controls['productName'].hasError('minlength')){
+      <span>Min.length should be 3 characters</span>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="descriptionId" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      rows="5"
+      id="descriptionId"
+      formControlName="description"
+    ></textarea>
+    @if(formControls['description'].touched &&
+    formControls['description'].invalid){
+    <div id="descriptionHelp" class="form-text text-danger">
+      @if(formControls['description'].hasError('required')){
+      <span>Required</span>
+      } @else if(formControls['description'].hasError('minlength')){
+      <span>Min.length should be 10 characters</span>
+      } @else {
+      <span>Max.length should be 200 characters</span>
+      }
+    </div>
+    }
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
